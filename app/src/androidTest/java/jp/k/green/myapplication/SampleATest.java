@@ -1,7 +1,11 @@
 package jp.k.green.myapplication;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static junit.framework.Assert.assertEquals;
@@ -12,10 +16,26 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class SampleATest {
 
+    @Mock(name = "sampleB")
+    private SampleB sampleBMock;
+
+    @InjectMocks
+    private SampleA sampleA = new SampleA();
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
-    public void createName() {
+    public void createName1() {
+        when(sampleBMock.getName(1)).thenReturn("aaa");
+        assertEquals( "aaa", sampleA.createName());
+    }
+
+    @Test
+    public void createName2() {
         SampleA hoge = mock(SampleA.class);
-        SampleB foo = new SampleB();
         when(hoge.createName()).thenReturn("aaa");
         assertEquals( "aaa", hoge.createName());
     }
