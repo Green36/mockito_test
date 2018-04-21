@@ -9,7 +9,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.powermock.modules.junit4.legacy.PowerMockRunner;
+//import org.powermock.modules.junit4.legacy.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -32,7 +33,7 @@ public class SampleATest {
     @Test
     public void createName1() {
         when(sampleBMock.getName(1)).thenReturn("aaa");
-        assertEquals( "aaa", sampleA.createName());
+        assertEquals( "aba", sampleA.createName());
     }
 
     @Test

@@ -1,7 +1,6 @@
 package jp.k.green.myapplication;
 
-
-
+import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,14 +8,18 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.legacy.PowerMockRunner;
 
-import static junit.framework.TestCase.assertEquals;
+import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
-public class SampleATest {
+@PrepareForTest(SampleB.class)
+public class SampleATestStatic extends TestCase{
 
     @Mock(name = "sampleB")
     private SampleB sampleBMock;
@@ -31,14 +34,9 @@ public class SampleATest {
 
     @Test
     public void createName1() {
-        when(sampleBMock.getName(1)).thenReturn("aaa");
-        assertEquals( "aaa", sampleA.createName());
+        when(SampleB.getSample()).thenReturn(3);
+        assertEquals( "aaa", SampleB.getSample());
     }
 
-    @Test
-    public void createName2() {
-        SampleA hoge = mock(SampleA.class);
-        when(hoge.createName()).thenReturn("aaa");
-        assertEquals( "aaa", hoge.createName());
-    }
+
 }

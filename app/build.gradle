@@ -16,18 +16,34 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    packagingOptions{
+        exclude 'mockito-extensions/org.mockito.plugins.MockMaker'
+        exclude 'mockito-extensions/org.mockito.plugins.StackTraceCleanerProvider'
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    testImplementation 'com.android.support.test:runner:1.0.1'
+    testImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    testImplementation 'junit:junit:4.8.2'
+    testImplementation 'org.mockito:mockito-core:2.8.0'
+    testImplementation 'com.google.dexmaker:dexmaker:1.2'
+    testImplementation 'com.google.dexmaker:dexmaker-mockito:1.2'
+    testImplementation ('org.powermock:powermock-module-junit4:1.7.1') {
+        exclude module: 'junit'
+    }
+    testImplementation ('org.powermock:powermock-api-mockito2:1.7.1') {
+        exclude module: 'mockito-all'
+    }
 
 
-    androidTestCompile 'org.mockito:mockito-core:1.10.19'
-    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
-    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+//    androidTestImplementation 'com.android.support.test:testing-support-lib:0.+'
 }

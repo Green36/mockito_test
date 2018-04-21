@@ -13,4 +13,7 @@ public class SampleB {
         }
         return name;
     }
+    static public int getSample() {
+        return 1;
+    }
 }

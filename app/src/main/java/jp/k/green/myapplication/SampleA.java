@@ -5,7 +5,7 @@ public class SampleA {
     private SampleB sampleB;
 
     public String createName() {
-        String ret = sampleB.getName(1);
+        String ret = sampleB.getName(SampleB.getSample());
         return ret;
     }
 }
