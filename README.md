@@ -14,3 +14,6 @@
 
 [robolectric](http://robolectric.org)
 [robolectric github](https://github.com/robolectric/robolectric)
+
+
+https://keis-software.com/2015/05/04/powermockito%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B%E3%83%86%E3%82%B9%E3%83%88/
