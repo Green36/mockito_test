@@ -3,6 +3,7 @@ package jp.k.green.myapplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockSettings;
 import org.mockito.Mockito;
@@ -19,6 +20,12 @@ import org.powermock.api.mockito.PowerMockito;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({SampleB.class, SampleA.class})
 public class SampleATest {
+
+    @Mock(name="sampleB")
+    private SampleB sampleBMock;
+
+    @InjectMocks
+    private SampleA sampleA = new SampleA();
 
     /**
      * basic
