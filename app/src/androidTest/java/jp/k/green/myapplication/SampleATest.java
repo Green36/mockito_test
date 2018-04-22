@@ -5,60 +5,38 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockSettings;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import org.powermock.api.mockito.PowerMockito;
-
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({SampleB.class, SampleA.class})
+@RunWith(MockitoJUnitRunner.class)
 public class SampleATest {
 
-    @Mock(name="sampleB")
+    @Mock(name = "sampleB")
     private SampleB sampleBMock;
 
     @InjectMocks
     private SampleA sampleA = new SampleA();
 
-    /**
-     * basic
-     */
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
     public void createName1() {
-        SampleA hoge = PowerMockito.mock(SampleA.class);
-        PowerMockito.when(hoge.createName()).thenReturn("aaa");
-        assertEquals( "aaa", hoge.createName());
+        when(sampleBMock.getName(1)).thenReturn("aaa");
+        assertEquals( "aaa", sampleA.createName());
     }
 
-    /**
-     * normal test
-     */
     @Test
     public void createName2() {
-        SampleB sampleBMock = PowerMockito.mock(SampleB.class);
-
-        Mockito.when(sampleBMock.getName(anyInt())).thenReturn("aaa");
-
-        SampleA a = new SampleA();
-        assertEquals( "other", a.createName());
-    }
-
-    /**
-     * static method test
-     */
-    @Test
-    public void createName3() {
-        PowerMockito.mockStatic(SampleB.class);
-        Mockito.when(SampleB.getSample()).thenReturn(3);
-
-        SampleA a = new SampleA();
-        assertEquals( "other", a.createName());
+        SampleA hoge = mock(SampleA.class);
+        when(hoge.createName()).thenReturn("aaa");
+        assertEquals( "aaa", hoge.createName());
     }
 }
