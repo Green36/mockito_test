@@ -13,6 +13,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import org.powermock.api.mockito.PowerMockito;
@@ -21,11 +22,16 @@ import org.powermock.api.mockito.PowerMockito;
 @PrepareForTest({SampleB.class, SampleA.class})
 public class SampleATest {
 
-    @Mock(name="sampleB")
+    @Mock(name = "sampleB")
     private SampleB sampleBMock;
 
     @InjectMocks
     private SampleA sampleA = new SampleA();
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     /**
      * basic
@@ -42,12 +48,8 @@ public class SampleATest {
      */
     @Test
     public void createName2() {
-        SampleB sampleBMock = PowerMockito.mock(SampleB.class);
-
-        Mockito.when(sampleBMock.getName(anyInt())).thenReturn("aaa");
-
-        SampleA a = new SampleA();
-        assertEquals( "other", a.createName());
+        Mockito.when(sampleBMock.getName(1)).thenReturn("aaa");
+        assertEquals( "aaa", sampleA.createName());
     }
 
     /**
