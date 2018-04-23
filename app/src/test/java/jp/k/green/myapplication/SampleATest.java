@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockSettings;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -17,8 +18,14 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import org.powermock.api.mockito.PowerMockito;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
-@RunWith(PowerMockRunner.class)
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest({SampleB.class, SampleA.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class)
+@PowerMockIgnore({ "org.mockito.*", "org.robolectric.*", "android.*" })
 @PrepareForTest({SampleB.class, SampleA.class})
 public class SampleATest {
 
