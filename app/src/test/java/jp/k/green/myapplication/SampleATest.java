@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockSettings;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.powermock.api.mockito.internal.configuration.PowerMockitoInjectingAnnotationEngine;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -50,18 +51,18 @@ public class SampleATest {
 
     @Rule
     public PowerMockRule rule = new PowerMockRule();
-//
-//
-//    @Mock(name = "sampleB")
-//    private SampleB sampleBMock;
-//
-//    @InjectMocks
-//    private SampleA sampleA = new SampleA();
-//
-//    @Before
-//    public void setup() {
+
+
+    @Mock(name = "sampleB")
+    private SampleB sampleBMock;
+
+    @InjectMocks
+    private SampleA sampleA = new SampleA();
+
+    @Before
+    public void setup() {
 //        MockitoAnnotations.initMocks(this);
-//    }
+    }
 
 
 //    private TextView mText;
@@ -95,14 +96,15 @@ public class SampleATest {
         assertEquals( "aaa", hoge.createName());
     }
 
-//    /**
-//     * normal test
-//     */
-//    @Test
-//    public void createName2() {
-//        Mockito.when(sampleBMock.getName(1)).thenReturn("aaa");
-//        assertEquals( "aaa", sampleA.createName());
-//    }
+    /**
+     * normal test
+     */
+    @Test
+    public void createName2() {
+        sampleBMock = Mockito.mock(SampleB.class);
+        Mockito.when(sampleBMock.getName(1)).thenReturn("aaa");
+        assertEquals( "aaa", sampleA.createName());
+    }
 
     /**
      * static method test
